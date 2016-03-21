@@ -1,0 +1,5 @@
+rootProject.name = 'tianmaspring'
+include 'springIoc'
+include 'springAop'
+include 'springthymeleaf'
+
