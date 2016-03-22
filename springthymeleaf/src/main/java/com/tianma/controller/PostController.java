@@ -1,15 +1,17 @@
 package com.tianma.controller;
 
+import com.tianma.exception.PostNotFoundException;
 import com.tianma.model.Post;
 import javafx.geometry.Pos;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
@@ -19,6 +21,9 @@ import javax.validation.Valid;
 @Controller
 @RequestMapping("/posts")
 public class PostController {
+
+    private static final Logger logger = LoggerFactory.getLogger(LoginController.class);
+
 
     @RequestMapping(value = "/secret_url", method = RequestMethod.GET)
     public String showCreatePage(HttpSession session) {
@@ -80,4 +85,19 @@ public class PostController {
         model.addAttribute("content", "This is content");
         return "post";
     }
+
+
+    // Total control - setup a model and return the view name yourself. Or consider
+    // subclassing ExceptionHandlerExceptionResolver (see below).
+    @ExceptionHandler(PostNotFoundException.class)
+    public ModelAndView handleError(HttpServletRequest req, Exception exception) {
+        logger.error("Request: " + req.getRequestURL() + " raised " + exception);
+
+        ModelAndView mav = new ModelAndView();
+        mav.addObject("exception", exception);
+        mav.addObject("url", req.getRequestURL());
+        mav.setViewName("error");
+        return mav;
+    }
+
 }

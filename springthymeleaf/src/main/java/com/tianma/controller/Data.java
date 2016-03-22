@@ -1,5 +1,6 @@
 package com.tianma.controller;
 
+import com.tianma.exception.PostNotFoundException;
 import com.tianma.model.Post;
 import javafx.geometry.Pos;
 
@@ -20,7 +21,7 @@ public class Data {
         return posts.stream()
                 .filter(p -> p.getId().equals(id))
                 .findFirst()
-                .get();
+                .orElseThrow(PostNotFoundException::new);
     }
 
     public static void add(String title,String content){
