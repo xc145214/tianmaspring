@@ -2,7 +2,6 @@ package com.tianma.controller;
 
 import com.tianma.exception.PostNotFoundException;
 import com.tianma.model.Post;
-import javafx.geometry.Pos;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;

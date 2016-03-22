@@ -2,7 +2,6 @@ package com.tianma.controller;
 
 import com.tianma.exception.PostNotFoundException;
 import com.tianma.model.Post;
-import javafx.geometry.Pos;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,6 +10,7 @@ import java.util.List;
  * Created by Administrator on 2016/3/22.
  */
 public class Data {
+    public static byte[] avatar = null;
     public static List<Post> posts = new ArrayList<>();
     static {
         posts.add(new Post("title1", "content1"));
@@ -23,6 +23,8 @@ public class Data {
                 .findFirst()
                 .orElseThrow(PostNotFoundException::new);
     }
+
+
 
     public static void add(String title,String content){
         posts.add(new Post(title, content));
