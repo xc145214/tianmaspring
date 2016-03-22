@@ -1,9 +1,8 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+<html>
 <head lang="en">
   <meta charset="UTF-8"/>
-  <title th:text="${post.title}">Cum sociis</title>
+  <title>创建博文</title>
   <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css"/>
   <link rel="stylesheet" href="/css/footer.css"/>
   <link rel="stylesheet" href="/css/sidbar.css"/>
@@ -13,33 +12,34 @@
   <script src="http://cdn.bootcss.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 </head>
 <body>
+
 <div class="container">
+  <div class="page-header">
+    <h2>创建博文
+      <small>在这里新建一篇博客</small>
+    </h2>
+  </div>
 
   <div class="row">
 
     <div class="col-sm-8">
 
-      <div class="page-header">
-        <h2 th:text="${post.title}">Cum sociis</h2>
-        <p class="blog-post-meta" th:text="${#dates.format(post.created, 'yyyy-MM-dd')}">2015年2月3日 分组：<a href="#">Web开发</a></p>
-      </div>
-
-      <div class="post-content" th:text="${post.content}">
-      </div>
-      <div class="blog-post">
-        <h3 class="blog-post-title"><a href="#" th:text="${title}"></a></h3>
-        <p class="blog-post-meta" th:text="${created}"></p>
-        <p class="blog-post-content" th:text="${content}"></p>
-      </div>
-      <nav>
-        <ul class="pager">
-          <li class="previous"><a href="#"><span aria-hidden="true">&larr;</span> 上一篇</a></li>
-          <li class="next"><a href="#">下一篇 <span aria-hidden="true">&rarr;</span></a></li>
-        </ul>
-      </nav>
+      <form action="/posts/" method="post">
+        <div class="form-group">
+          <label for="title">标题</label>
+          <input type="text" class="form-control"
+                 id="title" name="title"
+                 placeholder="文章的标题" autofocus=""/>
+        </div>
+        <div class="form-group">
+          <label for="content">内容</label>
+          <textarea class="form-control" id="content" name="content"
+                    placeholder="文章的内容" rows="18"></textarea>
+        </div>
+        <button type="submit" class="btn pull-right btn-primary">保存</button>
+      </form>
 
     </div>
-
 
     <div class="col-sm-3 col-sm-offset-1">
       <div class="sidebar-module sidebar-module-inset">
